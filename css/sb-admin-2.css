@@ -10795,7 +10795,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .chart-area {
-    height: 20rem;
+    height: 25rem;
   }
 }
 
@@ -11241,4 +11241,12 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+ .elo-rating {
+    position: absolute;
+    right: 15px;
+    top: -8px;
+ }
+ .card-body.player-ratings {
+    min-height: 440px;
 }
