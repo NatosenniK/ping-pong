@@ -1,3 +1,7 @@
+<?php
+session_start();
+include_once 'includes/dbconnect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -201,12 +205,39 @@
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
+						<?php
+						
+						
+						$user_id = $_SESSION['user'] ?? "";
+						
+						// Perform query
+						if ($result = mysqli_query($conn, "SELECT * FROM users WHERE user_id = '$user_id'")) {
+						  //echo "Returned rows are: " . mysqli_num_rows($result);
+						  // Free result set
 
+						  /* fetch associative array */
+							while ($row = mysqli_fetch_assoc($result)) {
+								$username = $row["username"];
+							}
+						}
+						
+						?>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Kinnesotan</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+									<?php 
+									if (empty($username)) {
+										echo "";
+									}
+									else 
+									{
+										echo $username;
+									}
+									
+									 ?>
+								</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/kinnesotan.svg">
                             </a>

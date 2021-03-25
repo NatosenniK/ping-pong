@@ -11,20 +11,46 @@ if(isset($_POST['btn-login']))
 {
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$upass = mysqli_real_escape_string($conn, $_POST['password']);
-	$res = mysqli_real_escape_string($conn, "SELECT * FROM users WHERE email='$email'");
-	$row = mysqli_query($conn,$res);
 	
-	if($row['password'] ??= md5($upass))
-	{
-		$_SESSION['user'] = $row['user_id'] ?? "";
-		header("Location: index.php");
+	if (mysqli_connect_errno()) {
+	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	  exit();
+	}
+
+	// Perform query
+	if ($result = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'")) {
+	  //echo "Returned rows are: " . mysqli_num_rows($result);
+	  // Free result set
+
+	  /* fetch associative array */
+		while ($row = mysqli_fetch_assoc($result)) {
+				if($row['password'] ??= md5($upass))
+				{
+					$_SESSION['user'] = $row['user_id'] ?? "";
+					header("Location: index.php");
+					
+				}
+				else
+				{
+					?>
+					<script>alert('wrong details');</script>
+					<?php
+				}
+			/*
+			$username = $row["username"];
+			$user_id = $row["user_id"];
+			echo '<h1>' .$username. '</h1>';
+			echo '<h1>' .$user_id. '</h1>';
+			*/
+			
+		}
 	}
 	else
 	{
-		?>
-        <script>alert('wrong details');</script>
-        <?php
+		echo '<h1>YOU SUCK</h1>';
 	}
+	
+	mysqli_close($conn);
 	
 }
 ?>
@@ -40,7 +66,7 @@ if(isset($_POST['btn-login']))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Ping Pong Tracker - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

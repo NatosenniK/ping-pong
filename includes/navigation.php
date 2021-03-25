@@ -1,7 +1,4 @@
-<?php
-session_start();
-include_once 'dbconnect.php';
-?>
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -46,7 +43,7 @@ include_once 'dbconnect.php';
 		}
 		else
 		{
-			
+			//echo $_SESSION['user'];
 			//header("Location: index.php");
 			echo '<a class="nav-link" href="logout.php">
 				<i class="fas fa-sign-out-alt"></i>
