@@ -9,15 +9,15 @@ if(isset($_SESSION['user'])!="")
 
 if(isset($_POST['btn-login']))
 {
-	$email = mysql_real_escape_string($_POST['email']);
-	$upass = mysql_real_escape_string($_POST['pass']);
-	$res=mysql_query("SELECT * FROM users WHERE email='$email'");
-	$row=mysql_fetch_array($res);
+	$email = mysqli_real_escape_string($conn, $_POST['email']);
+	$upass = mysqli_real_escape_string($conn, $_POST['password']);
+	$res = mysqli_real_escape_string($conn, "SELECT * FROM users WHERE email='$email'");
+	$row = mysqli_query($conn,$res);
 	
-	if($row['password']==md5($upass))
+	if($row['password'] ??= md5($upass))
 	{
-		$_SESSION['user'] = $row['user_id'];
-		header("Location: enterscores.php");
+		$_SESSION['user'] = $row['user_id'] ?? "";
+		header("Location: index.php");
 	}
 	else
 	{
@@ -71,15 +71,15 @@ if(isset($_POST['btn-login']))
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="post">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                placeholder="Enter Email Address..." name="email">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="exampleInputPassword" placeholder="Password" name="password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -88,9 +88,7 @@ if(isset($_POST['btn-login']))
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+										<button class="btn btn-primary btn-user btn-block" type="submit" name="btn-login" value="Sign In">Sign In</button>
                                         <hr>
                                     </form>
                                     <hr>

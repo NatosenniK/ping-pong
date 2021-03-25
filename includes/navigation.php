@@ -1,3 +1,7 @@
+<?php
+session_start();
+include_once 'dbconnect.php';
+?>
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -29,12 +33,27 @@
 
 	<!-- Nav Item - Pages Collapse Menu -->
 	<li class="nav-item">
-		<a class="nav-link" href="login.php">
+		
+		<?php
+		if(!isset($_SESSION['user']))
+		{
+			echo '<a class="nav-link" href="login.php">
 				<i class="fas fa-sign-in-alt"></i>
 				<span>Login</span></a>
-		<a class="nav-link" href="/register.php">
-				<i class="fas fa-user"></i>
-				<span>Register</span></a>
+				<a class="nav-link" href="register.php">
+						<i class="fas fa-user"></i>
+						<span>Register</span></a>';
+		}
+		else
+		{
+			
+			//header("Location: index.php");
+			echo '<a class="nav-link" href="logout.php">
+				<i class="fas fa-sign-out-alt"></i>
+				<span>Logout</span></a>';
+			
+		}
+		?>
 		<!--
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
 			aria-expanded="true" aria-controls="collapseTwo">
