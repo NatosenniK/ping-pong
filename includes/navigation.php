@@ -15,9 +15,9 @@
 
 	<!-- Nav Item - Dashboard -->
 	<li class="nav-item active">
-		<a class="nav-link" href="index.html">
-			<i class="fas fa-fw fa-tachometer-alt"></i>
-			<span>Dashboard</span></a>
+		<a class="nav-link" href="http://localhost/ping-pong/">
+			<i class="fas fa-fw fa-home"></i>
+			<span>Home</span></a>
 	</li>
 
 	<!-- Divider -->
@@ -45,6 +45,9 @@
 		{
 			//echo $_SESSION['user'];
 			//header("Location: index.php");
+			echo '<a class="nav-link" href="profile.php">
+				<i class="fas fa-user"></i>
+				<span>Profile</span></a>';
 			echo '<a class="nav-link" href="logout.php">
 				<i class="fas fa-sign-out-alt"></i>
 				<span>Logout</span></a>';
@@ -120,14 +123,26 @@
 	-->
 	<!-- Nav Item - Charts -->
 	<li class="nav-item">
-		<a class="nav-link" href="charts.html">
+	<?php
+		if(isset($_SESSION['user']))
+		{
+			//echo $_SESSION['user'];
+			//header("Location: index.php");
+			echo '<a class="nav-link" href="enter-scores.php">
+				<i class="fas fa-table-tennis"></i>
+				<span>Enter Scores</span></a>';
+		}
+		?>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="stats.php">
 			<i class="fas fa-fw fa-chart-area"></i>
 			<span>Stats</span></a>
 	</li>
 
 	<!-- Nav Item - Tables -->
 	<li class="nav-item">
-		<a class="nav-link" href="tables.html">
+		<a class="nav-link" href="standings.php">
 			<i class="fas fa-fw fa-table"></i>
 			<span>Standings</span></a>
 	</li>

@@ -47,7 +47,7 @@ if(isset($_POST['btn-login']))
 	}
 	else
 	{
-		echo '<h1>YOU SUCK</h1>';
+		echo '<h1>THAT DID NOT WORK GOOD SIR</h1>';
 	}
 	
 	mysqli_close($conn);
@@ -75,7 +75,7 @@ if(isset($_POST['btn-login']))
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
