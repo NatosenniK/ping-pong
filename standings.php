@@ -23,6 +23,9 @@ include_once 'includes/dbconnect.php';
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
+	
+	<!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -282,7 +285,7 @@ include_once 'includes/dbconnect.php';
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Top Player -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
@@ -300,7 +303,7 @@ include_once 'includes/dbconnect.php';
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Most Wins  -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -318,7 +321,7 @@ include_once 'includes/dbconnect.php';
                             </div>
                         </div>
 						
-						<!-- Pending Requests Card Example -->
+						<!-- Most Points -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -335,7 +338,7 @@ include_once 'includes/dbconnect.php';
                                 </div>
                             </div>
                         </div>
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Top Rated Player -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
@@ -372,85 +375,83 @@ include_once 'includes/dbconnect.php';
 
                     <div class="row">
 
-                        <!-- Area Chart -->
-                        <div class="col-xl-6 col-lg-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Games Played</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-										<!--
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-										-->
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
+						<!-- DataTales Example -->
+					<div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Ping Pong Tracker Standings</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Wins</th>
+                                            <th>Losses</th>
+                                            <th>Points For</th>
+                                            <th>Points Against</th>
+                                            <th>Ranking (beta)</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- <tfoot>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Wins</th>
+                                            <th>Losses</th>
+                                            <th>Points For</th>
+                                            <th>Points Against</th>
+                                            <th>Ranking (beta)</th>
+                                        </tr>
+                                    </tfoot> -->
+                                    <tbody>
+                                        <tr>
+                                            <td>Kinnesotan</td>
+                                            <td>40</td>
+                                            <td>8</td>
+                                            <td>1033</td>
+                                            <td>797</td>
+                                            <td>1186</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Terry</td>
+                                            <td>39</td>
+                                            <td>6</td>
+                                            <td>1033</td>
+                                            <td>797</td>
+                                            <td>1186</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fobia</td>
+                                            <td>35</td>
+                                            <td>12</td>
+                                            <td>1033</td>
+                                            <td>797</td>
+                                            <td>1186</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kurdy</td>
+                                            <td>33</td>
+                                            <td>20</td>
+                                            <td>1033</td>
+                                            <td>797</td>
+                                            <td>1186</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jesse</td>
+                                            <td>10</td>
+                                            <td>35</td>
+                                            <td>1033</td>
+                                            <td>797</td>
+                                            <td>1186</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-						<div class="col-xl-6 col-lg-6">
-                        <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Player Ratings</h6>
-                                </div>
-                                <div class="card-body player-ratings">
-                                    <h4 class="small font-weight-bold">Terry <span
-                                            class="float-right">1650</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 95%"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Kinne <span
-                                            class="float-right">1630</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Fobia <span
-                                            class="float-right">1620</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 90%"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Kurdy<span
-                                            class="float-right">1590</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 70%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Jesse <span
-                                            class="float-right">1550</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 65%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-									<h4 class="small font-weight-bold">Walter <span
-                                            class="float-right">1450</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-dark" role="progressbar" style="width: 50%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-									
-                                </div>
-                            </div>
-                </div>
+                    </div>
+					</div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -510,9 +511,12 @@ include_once 'includes/dbconnect.php';
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
