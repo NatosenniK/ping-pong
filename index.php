@@ -14,7 +14,7 @@ include_once 'includes/dbconnect.php';
     <meta name="author" content="">
 
     <title>Ping Pong Score Tracking</title>
-
+	
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -97,43 +97,62 @@ include_once 'includes/dbconnect.php';
                                     <h6 class="m-0 font-weight-bold text-primary">Player Ratings</h6>
                                 </div>
                                 <div class="card-body player-ratings">
-                                    <h4 class="small font-weight-bold">Terry <span
-                                            class="float-right">1650</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 95%"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Kinne <span
-                                            class="float-right">1630</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Fobia <span
-                                            class="float-right">1620</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 90%"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Kurdy<span
-                                            class="float-right">1590</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 70%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Jesse <span
-                                            class="float-right">1550</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 65%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-									<h4 class="small font-weight-bold">Walter <span
-                                            class="float-right">1450</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-dark" role="progressbar" style="width: 50%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-									
+								<?php
+												if($res = mysqli_query($conn, "SELECT  username,
+														SUM(wins),
+														SUM(loss),
+														SUM(PF),
+														SUM(PA),
+														elo
+														FROM (
+														(SELECT users.user_ID,
+															users.username AS username,
+															COUNT(games.WinnerID) AS wins,
+															0 AS loss,
+															SUM(games.PointsFor) AS PF,
+															SUM(games.PointsAgainst) AS PA,
+															users.Elo AS elo
+														FROM users, games
+														WHERE games.WinnerID = users.user_ID
+														GROUP BY users.user_ID)
+														UNION ALL
+														(SELECT users.user_ID,
+															users.username AS username,
+															0 AS wins,
+															COUNT(games.LoserID) AS loss,
+															SUM(games.PointsAgainst) AS PF,
+															SUM(games.PointsFor) AS PA,
+															users.Elo AS elo
+														FROM users, games
+														WHERE games.LoserID = users.user_ID
+														GROUP BY users.user_ID)
+														) AS t
+														GROUP BY username
+														ORDER BY elo desc
+														LIMIT 6;")) {
+															$i = 0;
+															while($row = mysqli_fetch_assoc($res))
+															{
+															 ?>
+															  <h4 class="small font-weight-bold"><?php echo $row['username']; ?><span
+																		class="float-right"><?php echo $row['elo']; ?></span></h4>
+																<div class="progress mb-4">
+																	<?php 
+																		$elo = $row['elo'];
+																		$max = $elo + 100;
+																		$width = ($elo / 1750) * 100;
+																		
+																	?>
+																	<div class="progress-bar bar-<?php echo $i; $i++ ?>" role="progressbar" style="width: <?php echo $width;?>%"
+																		aria-valuenow="20" aria-valuemin="0" aria-valuemax="2000"></div>
+																</div>
+
+																<?php
+															}
+														} else {
+															echo("Error description: " . mysqli_error($conn));
+														}
+											?>	
                                 </div>
                             </div>
                 </div>

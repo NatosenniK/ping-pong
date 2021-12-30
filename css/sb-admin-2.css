@@ -11240,11 +11240,29 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
- .elo-rating {
-    position: absolute;
-    right: 15px;
-    top: -8px;
- }
+.elo-rating {
+	position: absolute;
+	right: 15px;
+	top: -8px;
+}
  .card-body.player-ratings {
     min-height: 440px;
+}
+.bar-0 {
+	background-color: #e74a3b  !important;
+}
+.bar-1 {
+	background-color: #f6c23e !important;
+}
+.bar-2 {
+	background-color: #4e73df !important;
+}
+.bar-3 {
+	background-color: #36b9cc !important;
+}
+.bar-4 {
+	background-color: #1cc88a !important;
+}
+.bar-5 {
+	background-color: #5a5c69 !important;
 }
